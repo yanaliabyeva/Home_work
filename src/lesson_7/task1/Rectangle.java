@@ -7,7 +7,6 @@ public class Rectangle extends Figure{
         side1 = num1;
         side2 = num2;
     }
-
     @Override
     public double calculatePerimeter() {
        double per = (side1 + side2) * 2;
