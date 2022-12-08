@@ -18,13 +18,28 @@ package lesson_10_1;
 
 public class Main {
     public static void main(String[] args) {
-        String number = "1234-abc-1234-abc-1a2b";
+        String number = "1234-abed-1234-abed-1a2";
         List.print(number);
         List.print1(number);
         List.print2(number);
         List.print3(number);
-        List.print4(number);
-        List.print5(number);
-        List.print6(number);
+        try{
+            System.out.println(List.print4(number));
+        }
+        catch (AbcContainsExeption ex){
+            System.out.println(ex);
+        }
+        try{
+            System.out.println(List.print5(number));
+        }
+        catch (Contains555Exeption e){
+            System.out.println(e);
+        }
+        try{
+            System.out.println(List.print6(number));
+        }
+        catch (Containce1a2bExaption e2){
+            System.out.println(e2);
+        }
     }
 }
