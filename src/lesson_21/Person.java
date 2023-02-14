@@ -6,13 +6,15 @@ public class Person {
     private String sex;
     private int age;
 
-    public String getName(){
+    public String getName() {
         return name;
     }
-    public String getLastName(){
+
+    public String getLastName() {
         return lastName;
     }
-    public String getSex(){
+
+    public String getSex() {
         return sex;
     }
 

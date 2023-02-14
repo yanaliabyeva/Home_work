@@ -34,17 +34,17 @@ Note:
 /Users/aliabyeva/IdeaProjects/yana_aliabyeva_HW_TMS/src/lesson_21/file.txt
  */
 public class Main {
-    static List <Person> list  = new ArrayList<>();
+    static List<Person> list = new ArrayList<>();
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String path;
         System.out.println("Введите путь к файлу:");
         path = scanner.next();
-        try(BufferedReader bufferedReader = new BufferedReader(new FileReader(path))) {
-           String line;
-            while ((line = bufferedReader.readLine())!= null){
-             Person person = new Person();
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(path))) {
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                Person person = new Person();
                 String[] array = line.split(",");
                 person.setName(array[0]);
                 person.setLastName(array[1]);
@@ -58,24 +58,23 @@ public class Main {
             throw new RuntimeException(e);
         }
 
-        list.sort( new Comparator (){
+        list.sort(new Comparator<Person>() {
             @Override
-            public int compare(Object o1, Object o2) {
-                Person p1 = (Person) o1;
-                Person p2 = (Person) o2;
+            public int compare(Person p1, Person p2) {
                 return (p1.getName() + p1.getLastName()).compareTo(p2.getName() + p2.getLastName());
             }
         });
-        int countAge = 0 ,  countMale = 0 ,  countFemale = 0 ;
+        int countAge = 0;
+        int countMale = 0;
+        int countFemale = 0;
 
         for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getAge() > 30){
+            if (list.get(i).getAge() > 30) {
                 countAge++;
             }
-            if (list.get(i).getSex().equals("male")){
+            if (list.get(i).getSex().equals("male")) {
                 countMale++;
-            }
-            else {
+            } else {
                 countFemale++;
             }
         }
@@ -84,17 +83,23 @@ public class Main {
         System.out.println("Количество женщин : " + countFemale);
         writeSortedFile();
     }
-    public static void writeSortedFile(){
+
+    public static void writeSortedFile() {
+        BufferedWriter bufferedWriter = null;
         try {
-        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("/Users/aliabyeva/IdeaProjects/" +
-                "yana_aliabyeva_HW_TMS/src/lesson_21/file.txt"));
-            for (int i = 0; i < list.size() ; i++) {
-                bufferedWriter.write(list.get(i)+" \n ");
+            bufferedWriter = new BufferedWriter(new FileWriter("/Users/aliabyeva/IdeaProjects/" +
+                    "yana_aliabyeva_HW_TMS/src/lesson_21/file.txt"));
+            for (int i = 0; i < list.size(); i++) {
+                bufferedWriter.write(list.get(i) + " \n ");
             }
-                bufferedWriter.close();
-            }
-        catch (IOException exception){
+        } catch (IOException exception) {
             throw new RuntimeException();
+        } finally {
+            try {
+                bufferedWriter.close();
+            } catch (IOException exception) {
+                System.out.println(exception.getStackTrace());
+            }
         }
     }
 }
