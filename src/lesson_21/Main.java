@@ -34,9 +34,8 @@ Note:
 /Users/aliabyeva/IdeaProjects/yana_aliabyeva_HW_TMS/src/lesson_21/file.txt
  */
 public class Main {
-    static List<Person> list = new ArrayList<>();
-
     public static void main(String[] args) {
+        List<Person> list = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
         String path;
         System.out.println("Введите путь к файлу:");
@@ -53,9 +52,9 @@ public class Main {
                 list.add(person);
             }
         } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            System.out.println(e.getStackTrace());
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.out.println(e.getStackTrace());
         }
 
         list.sort(new Comparator<Person>() {
@@ -81,10 +80,10 @@ public class Main {
         System.out.println("Количество человек с возрастом > 30 : " + countAge);
         System.out.println("Количество мужчин : " + countMale);
         System.out.println("Количество женщин : " + countFemale);
-        writeSortedFile();
+        writeSortedFile(list);
     }
 
-    public static void writeSortedFile() {
+    public static void writeSortedFile(List<Person> list ) {
         BufferedWriter bufferedWriter = null;
         try {
             bufferedWriter = new BufferedWriter(new FileWriter("/Users/aliabyeva/IdeaProjects/" +
